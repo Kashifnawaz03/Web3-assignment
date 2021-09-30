@@ -30,11 +30,23 @@ const ABI = [
 	}
 ]
 const web3 = new Web3(rpcURL);
-
 const contractAddress = "0xdcc98e910B692722C0e389b900624830989A1d2B";
+const getData = async () => {
+    try {
+        const contract = await new web3.eth.Contract(ABI, contractAddress);
+        const totalsupply = await contract.methods.retrieve().call();
+        console.log(totalsupply);
+
+    }catch(err) {
+
+    }
+}
+getData();
+
+/*const contractAddress = "0xdcc98e910B692722C0e389b900624830989A1d2B";
 const contract = new web3.eth.Contract(ABI,contractAddress);
 contract.methods.retrieve().call((err,result)=>{
     if(!err){
         console.log("Result from contract", result);
     }
-})
+})*/
