@@ -1,6 +1,6 @@
 const Web3 = require("Web3");
 const Tx = require("ethereumjs-tx").Transaction;
-const rpcURL = "https://rinkeby.infura.io/v3/fa46fd160fd847c39ce43273c683de53";
+const rpcURL = "https://ropsten.infura.io/v3/fa46fd160fd847c39ce43273c683de53";
 
 const web3 = new Web3(rpcURL);
 const account1 = "0x579a84923cB461E5a130B1Bfd28480834781C470";
@@ -18,7 +18,7 @@ web3.eth.getTransactionCount(account1, (err,txCount)=>{
         gasPrice:   web3.utils.toHex(web3.utils.toWei('10','gwei'))
 
     }
-    const tx = new Tx(txObject, {'chain':'rinkeby'});
+    const tx = new Tx(txObject, {'chain':'ropsten'});
     tx.sign(account1_privatekey);
 
     const serialize = tx.serialize();
