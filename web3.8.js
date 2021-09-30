@@ -11,7 +11,7 @@ const utilitiesFunction = async () => {
         console.log(web3.utils.keccak256("Kashif Nawaz"));
         console.log(web3.utils.sha3("20"));
         console.log(web3.utils.keccak256("20"));
-        console.log(web3.utils.randomHex(20));
+        console.log(web3.utils.randomHex(15));
     }catch(err) {
         console.log(err);
     }
