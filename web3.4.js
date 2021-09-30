@@ -1,4 +1,4 @@
-var Tx = require("ethereumjs-tx");
+var Tx = require('ethereumjs-tx').Transaction;
 var Web3 = require("web3");
 
 const rpcURL = "https://ropsten.infura.io/v3/fa46fd160fd847c39ce43273c683de53";
@@ -9,6 +9,7 @@ const byteCode = "608060405234801561001057600080fd5b5061019c806100206000396000f3
 const byteCodeBuffer = Buffer.from(byteCode, "hex");
 const privatekeyBuffer = Buffer.from(privatekey, "hex");
 
+/*
 web3.eth.getTransactionCount(account, (error, txCount)=>{
     console.log(txCount);
     if (error){
@@ -21,7 +22,7 @@ web3.eth.getTransactionCount(account, (error, txCount)=>{
             gasLimit:  web3.utils.toHex(1000000),
             gasPrice:  web3.utils.toHex(web3.utils.toWei("10","gwei"))
         }
-        const tx = new Tx.Transaction(txObj, { chain: "ropsten", hardfork: "petersburg" });
+        const tx = new Tx(txObj, { chain: "ropsten", hardfork: "petersburg" });
         tx.sign(privatekeyBuffer);
         const serializedTx = tx.serialize();
         const raw = "0x" + serializedTx.toString('hex');
@@ -39,3 +40,27 @@ web3.eth.getTransactionCount(account, (error, txCount)=>{
         })
     }
 })
+*/
+const deployFunction = async () => {
+    try {
+        const txCount = await web3.eth.getTransactionCount(account);
+        const TxObject = {
+            nonce: web3.utils.toHex(txCount),
+            data: byteCodeBuffer,
+            gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gWei')),
+            gasLimit: web3.utils.toHex(1000000)
+        }
+
+        const tx = new Tx(TxObject, { 'chain':'ropsten' });
+        tx.sign(privatekeyBuffer);
+        const serializedTX = tx.serialize();
+        const raw = '0x' + serializedTX.toString('hex');
+
+        const response = await web3.eth.sendSignedTransaction(raw);
+        console.log(response);
+
+    }catch(err) {
+        console.log(err);
+    }
+}
+deployFunction()
