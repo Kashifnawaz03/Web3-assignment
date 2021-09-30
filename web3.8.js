@@ -9,8 +9,8 @@ const utilitiesFunction = async () => {
         console.log("Gas Price in Ether :" + gasPriceConvert);
         console.log(web3.utils.sha3("Kashif Nawaz"));
         console.log(web3.utils.keccak256("Kashif Nawaz"));
-        console.log(web3.utils.sha3("1976"));
-        console.log(web3.utils.keccak256("1976"));
+        console.log(web3.utils.sha3("20"));
+        console.log(web3.utils.keccak256("20"));
         console.log(web3.utils.randomHex(20));
     }catch(err) {
         console.log(err);
